@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Anniversary Mama & Baba 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #FF6B8A;
+    --peach: #FFB4A2;
+    --lavender: #C9B8E8;
+    --mint: #A8E6CF;
+    --yellow: #FFD966;
+    --sky: #A8D8EA;
+    --cream: #FFF8F0;
+    --deep-rose: #E04A6A;
+    --text-dark: #4A2040;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  /* ===== FLOATING BACKGROUND ELEMENTS ===== */
+  .bg-floaties {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .floatie {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.18;
+    animation: floatBg 8s ease-in-out infinite;
+  }
+
+  @keyframes floatBg {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.05); }
+  }
+
+  /* ===== PAGES ===== */
+  .page {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    transform: scale(0.96);
+    z-index: 1;
+    padding: 20px;
+  }
+
+  .page.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: scale(1);
+  }
+
+  /* ===== PAGE 1 - COVER ===== */
+  #page1 { background: linear-gradient(135deg, #FFE4EC 0%, #FFF0F8 40%, #EDE7FF 100%); }
+
+  .heart-ring {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin-bottom: 24px;
+  }
+
+  .heart-ring svg { width: 100%; height: 100%; animation: heartbeat 1.4s ease-in-out infinite; }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.12); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.06); }
+    70% { transform: scale(1); }
+  }
+
+  .cover-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    color: var(--deep-rose);
+    text-align: center;
+    line-height: 1.2;
+    text-shadow: 2px 2px 0 rgba(255,150,170,0.3);
+    margin-bottom: 10px;
+  }
+
+  .cover-sub {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    color: #9B5E7A;
+    text-align: center;
+    margin-bottom: 36px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.25);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .btn:hover::after { opacity: 1; }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-rose { background: linear-gradient(135deg, var(--rose), var(--deep-rose)); color: white; box-shadow: 0 6px 20px rgba(255,107,138,0.4); }
+  .btn-lavender { background: linear-gradient(135deg, var(--lavender), #A890D3); color: white; box-shadow: 0 6px 20px rgba(168,144,211,0.4); }
+  .btn-mint { background: linear-gradient(135deg, var(--mint), #5CC8A0); color: white; box-shadow: 0 6px 20px rgba(92,200,160,0.4); }
+  .btn-yellow { background: linear-gradient(135deg, var(--yellow), #F0C020); color: #5A4000; box-shadow: 0 6px 20px rgba(240,192,32,0.4); }
+  .btn-peach { background: linear-gradient(135deg, var(--peach), #FF8C7A); color: white; box-shadow: 0 6px 20px rgba(255,140,122,0.4); }
+  .btn-sky { background: linear-gradient(135deg, var(--sky), #7BBFD8); color: white; box-shadow: 0 6px 20px rgba(123,191,216,0.4); }
+
+  /* ===== PAGE 2 - LOVE NOTES ===== */
+  #page2 { background: linear-gradient(135deg, #FFF0E8 0%, #FFF8F0 50%, #E8F8F0 100%); }
+
+  .page-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 7vw, 3.2rem);
+    color: var(--deep-rose);
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .love-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    max-width: 680px;
+    margin-bottom: 30px;
+  }
+
+  .love-card {
+    background: white;
+    border-radius: 20px;
+    padding: 16px 22px;
+    font-size: clamp(0.88rem, 2.5vw, 1rem);
+    color: var(--text-dark);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    border: 2px solid transparent;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+  }
+
+  .love-card:hover {
+    transform: translateY(-4px) rotate(-1deg);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  }
+
+  .love-card.mama { border-color: var(--rose); }
+  .love-card.baba { border-color: var(--sky); }
+  .love-card.family { border-color: var(--mint); }
+  .love-card.wish { border-color: var(--lavender); }
+
+  /* ===== PAGE 3 - WISHES ===== */
+  #page3 { background: linear-gradient(135deg, #EEE6FF 0%, #F8F0FF 50%, #FFE8F4 100%); }
+
+  .wishes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    max-width: 700px;
+    width: 100%;
+    margin-bottom: 28px;
+  }
+
+  .wish-card {
+    background: white;
+    border-radius: 24px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border-top: 4px solid var(--lavender);
+  }
+
+  .wish-card:nth-child(2) { border-top-color: var(--rose); }
+  .wish-card:nth-child(3) { border-top-color: var(--mint); }
+  .wish-card:nth-child(4) { border-top-color: var(--yellow); }
+
+  .wish-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 14px 36px rgba(0,0,0,0.13); }
+
+  .wish-emoji { font-size: 2.4rem; margin-bottom: 8px; }
+  .wish-text { font-size: 0.88rem; color: #6A4060; font-weight: 600; line-height: 1.5; }
+
+  /* ===== PAGE 4 - MEMORIES ===== */
+  #page4 { background: linear-gradient(135deg, #E8F8FF 0%, #F0FFF8 50%, #FFF8E8 100%); }
+
+  .memory-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 560px;
+    width: 100%;
+    margin-bottom: 28px;
+    max-height: 55vh;
+    overflow-y: auto;
+    padding-right: 8px;
+  }
+
+  .memory-timeline::-webkit-scrollbar { width: 4px; }
+  .memory-timeline::-webkit-scrollbar-thumb { background: var(--peach); border-radius: 4px; }
+
+  .memory-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: white;
+    border-radius: 20px;
+    padding: 14px 18px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+  }
+
+  .memory-item::before {
+    content: '';
+    width: 6px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 20px 0 0 20px;
+  }
+
+  .memory-item:nth-child(1)::before { background: var(--rose); }
+  .memory-item:nth-child(2)::before { background: var(--sky); }
+  .memory-item:nth-child(3)::before { background: var(--mint); }
+  .memory-item:nth-child(4)::before { background: var(--yellow); }
+  .memory-item:nth-child(5)::before { background: var(--lavender); }
+
+  .memory-item:hover { transform: translateX(6px); box-shadow: 0 8px 24px rgba(0,0,0,0.11); }
+
+  .mem-emoji { font-size: 2rem; flex-shrink: 0; }
+  .mem-text { font-size: 0.9rem; color: var(--text-dark); font-weight: 600; line-height: 1.5; }
+  .mem-tag { font-size: 0.75rem; color: #AA88A0; font-weight: 400; }
+
+  /* ===== PAGE 5 - FINAL ===== */
+  #page5 { background: linear-gradient(135deg, #FFE4EC 0%, #FFF0E0 35%, #E8F4FF 70%, #F0E8FF 100%); }
+
+  .final-frame {
+    background: white;
+    border-radius: 32px;
+    padding: 36px 32px;
+    max-width: 560px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-frame::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--rose), var(--peach), var(--yellow), var(--mint), var(--sky), var(--lavender), var(--rose));
+  }
+
+  .final-msg {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    color: var(--deep-rose);
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+
+  .final-sub {
+    font-size: 0.95rem;
+    color: #8A6080;
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+
+  .hearts-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .heart-chip {
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .heart-chip:hover { transform: scale(1.12); }
+
+  /* ===== POPUP MESSAGES ===== */
+  .popup-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+  }
+
+  .popup-msg {
+    position: absolute;
+    background: white;
+    border-radius: 50px;
+    padding: 10px 22px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.15rem;
+    font-weight: 700;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    pointer-events: none;
+    white-space: nowrap;
+    animation: popupFly 2.4s ease-out forwards;
+  }
+
+  @keyframes popupFly {
+    0% { opacity: 0; transform: translateY(0) scale(0.5); }
+    15% { opacity: 1; transform: translateY(-20px) scale(1.05); }
+    70% { opacity: 1; transform: translateY(-80px) scale(1); }
+    100% { opacity: 0; transform: translateY(-130px) scale(0.8); }
+  }
+
+  /* ===== SPARKLES ===== */
+  .sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 998;
+    font-size: 1.4rem;
+    animation: sparklePop 1s ease-out forwards;
+  }
+
+  @keyframes sparklePop {
+    0% { opacity: 1; transform: scale(0) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.4) rotate(180deg); }
+    100% { opacity: 0; transform: scale(0.6) rotate(360deg) translateY(-40px); }
+  }
+
+  /* ===== NAV DOTS ===== */
+  .nav-dots {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+  }
+
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(180,100,140,0.25);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .dot.active { background: var(--rose); width: 28px; border-radius: 6px; }
+
+  /* ===== CONFETTI ===== */
+  .confetti-piece {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    z-index: 997;
+    border-radius: 2px;
+    animation: confettiFall linear forwards;
+  }
+
+  @keyframes confettiFall {
+    0% { opacity: 1; transform: translateY(-20px) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(105vh) rotate(720deg); }
+  }
+
+  /* ===== BACK BTN ===== */
+  .back-btn {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    background: rgba(255,255,255,0.8);
+    border: none;
+    border-radius: 50px;
+    padding: 8px 18px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    cursor: pointer;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+    transition: all 0.2s;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .back-btn.visible { opacity: 1; pointer-events: all; }
+  .back-btn:hover { background: white; transform: scale(1.05); }
+
+  /* Scrollable pages on small screens */
+  @media (max-height: 650px) {
+    .page { overflow-y: auto; justify-content: flex-start; padding-top: 60px; padding-bottom: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating background blobs -->
+<div class="bg-floaties">
+  <div class="floatie" style="width:300px;height:300px;background:var(--rose);top:-80px;left:-80px;animation-delay:0s"></div>
+  <div class="floatie" style="width:250px;height:250px;background:var(--lavender);bottom:-60px;right:-60px;animation-delay:2s"></div>
+  <div class="floatie" style="width:180px;height:180px;background:var(--mint);top:40%;right:5%;animation-delay:4s"></div>
+  <div class="floatie" style="width:140px;height:140px;background:var(--yellow);bottom:20%;left:5%;animation-delay:1s"></div>
+</div>
+
+<!-- Popup container -->
+<div class="popup-container" id="popupContainer"></div>
+
+<!-- Back button -->
+<button class="back-btn" id="backBtn" onclick="goBack()">← Back</button>
+
+<!-- Nav dots -->
+<div class="nav-dots" id="navDots">
+  <div class="dot active" onclick="goTo(0)"></div>
+  <div class="dot" onclick="goTo(1)"></div>
+  <div class="dot" onclick="goTo(2)"></div>
+  <div class="dot" onclick="goTo(3)"></div>
+  <div class="dot" onclick="goTo(4)"></div>
+</div>
+
+<!-- ===== PAGE 1 — COVER ===== -->
+<div class="page active" id="page1">
+  <div class="heart-ring">
+    <svg viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="90" cy="90" r="84" stroke="#FFB4A2" stroke-width="3" stroke-dasharray="8 6" opacity="0.6"/>
+      <circle cx="90" cy="90" r="72" fill="#FFF0F5"/>
+      <path d="M90 124s-38-24-38-50c0-14 10-24 24-24 6 0 11 2 14 6 3-4 8-6 14-6 14 0 24 10 24 24 0 26-38 50-38 50z" fill="url(#hg)"/>
+      <defs>
+        <linearGradient id="hg" x1="52" y1="50" x2="128" y2="124" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#FF6B8A"/>
+          <stop offset="100%" stop-color="#E04A6A"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+  <h1 class="cover-title">Happy Anniversary<br>Mama & Baba 💕</h1>
+  <p class="cover-sub">With all the love in the world — from your children 🌸</p>
+  <button class="btn btn-rose" onclick="goTo(1); showPopup('💖 This is for you both!', event)">
+    Open Our Love Letter 💌
+  </button>
+</div>
+
+<!-- ===== PAGE 2 — LOVE NOTES ===== -->
+<div class="page" id="page2">
+  <h2 class="page-title">Words From Our Heart 💝</h2>
+  <div class="love-cards">
+
+    <div class="love-card mama" onclick="showPopup('I love you so much, Mama! 🌹', event); pop(event)">
+      🌷 I love u Mama
+    </div>
+    <div class="love-card baba" onclick="showPopup('I love you, Baba! You are my hero 💙', event); pop(event)">
+      🌊 I love u Baba
+    </div>
+    <div class="love-card family" onclick="showPopup('Thank you for taking care of kakak and adik! 🥰', event); pop(event)">
+      🏠 Thank u for taking care of kakak & adik
+    </div>
+    <div class="love-card mama" onclick="showPopup('Mama, your hugs are the warmest in the world 🤗', event); pop(event)">
+      🤗 Mama\'s hugs are the best
+    </div>
+    <div class="love-card baba" onclick="showPopup('Baba and adik goofing around is our favourite thing ever 😄', event); pop(event)">
+      😄 Baba & adik — our two goofballs
+    </div>
+    <div class="love-card family" onclick="showPopup('Thank you for every sacrifice you made for us 🙏', event); pop(event)">
+      🙏 Thank you for every sacrifice
+    </div>
+    <div class="love-card wish" onclick="showPopup('We are so lucky to have parents like you two! ⭐', event); pop(event)">
+      ⭐ We\'re so lucky to have you
+    </div>
+    <div class="love-card mama" onclick="showPopup('Mama, you make every house a home 🏡', event); pop(event)">
+      🏡 Mama makes our house a home
+    </div>
+    <div class="love-card baba" onclick="showPopup('Baba, your laugh fills the whole house! 😄', event); pop(event)">
+      😄 Baba\'s laugh fills our home
+    </div>
+    <div class="love-card family" onclick="showPopup('Thank you for always believing in us 💫', event); pop(event)">
+      💫 You always believe in us
+    </div>
+
+  </div>
+  <button class="btn btn-mint" onclick="goTo(2); showPopup('So many wishes for you! 🌟', event)">
+    See Our Wishes For You 🌟
+  </button>
+</div>
+
+<!-- ===== PAGE 3 — WISHES ===== -->
+<div class="page" id="page3">
+  <h2 class="page-title">Our Wishes For You 🌙</h2>
+  <div class="wishes-grid">
+
+    <div class="wish-card" onclick="showPopup('May your love grow stronger every single day! 💞', event); pop(event)">
+      <div class="wish-emoji">💞</div>
+      <div class="wish-text">May your love grow stronger with every passing day!</div>
+    </div>
+    <div class="wish-card" onclick="showPopup('Wishing you a lifetime of happiness together! 🎊', event); pop(event)">
+      <div class="wish-emoji">🎊</div>
+      <div class="wish-text">A lifetime of happiness, laughter and joy — always!</div>
+    </div>
+    <div class="wish-card" onclick="showPopup('May your home always be full of warmth & love 🏡', event); pop(event)">
+      <div class="wish-emoji">🏡</div>
+      <div class="wish-text">May your home always be filled with warmth and love</div>
+    </div>
+    <div class="wish-card" onclick="showPopup('Wishing you both good health forever! 🌿', event); pop(event)">
+      <div class="wish-emoji">🌿</div>
+      <div class="wish-text">Good health and long life for both of you always</div>
+    </div>
+    <div class="wish-card" onclick="showPopup('May every year together be sweeter than the last 🍯', event); pop(event)">
+      <div class="wish-emoji">🍯</div>
+      <div class="wish-text">May every anniversary be sweeter than the last</div>
+    </div>
+    <div class="wish-card" onclick="showPopup('May Allah bless your marriage always 🤲', event); pop(event)">
+      <div class="wish-emoji">🤲</div>
+      <div class="wish-text">May Allah bless and protect your marriage, always</div>
+    </div>
+
+  </div>
+  <button class="btn btn-lavender" onclick="goTo(3); showPopup('More love coming! 💜', event)">
+    Our Favourite Memories 📸
+  </button>
+</div>
+
+<!-- ===== PAGE 4 — MEMORIES ===== -->
+<div class="page" id="page4">
+  <h2 class="page-title">Moments We Cherish 📸</h2>
+  <div class="memory-timeline">
+
+    <div class="memory-item" onclick="showPopup('Mama, your cooking tastes like home and love. Nobody can ever replace it. 🍛', event); pop(event)">
+      <div class="mem-emoji">🍛</div>
+      <div>
+        <div class="mem-text">Mama's home cooking — warm, full of love, irreplaceable</div>
+        <div class="mem-tag">Every meal felt like a hug from the inside 💛</div>
+      </div>
+    </div>
+
+    <div class="memory-item" onclick="showPopup('Baba, you worked so hard for us. We see it. We feel it. Thank you. 💪', event); pop(event)">
+      <div class="mem-emoji">💪</div>
+      <div>
+        <div class="mem-text">Baba's hardwork and quiet, steady strength for this family</div>
+        <div class="mem-tag">You gave everything so we could have everything 🌟</div>
+      </div>
+    </div>
+
+    <div class="memory-item" onclick="showPopup('Everything we are today is because you believed in us. Thank you, Mama & Baba. 🎓', event); pop(event)">
+      <div class="mem-emoji">🎓</div>
+      <div>
+        <div class="mem-text">Supporting our education — never once giving up on us</div>
+        <div class="mem-tag">You invested in our future with all you had 📚</div>
+      </div>
+    </div>
+
+    <div class="memory-item" onclick="showPopup('Mama, you are the most gentle, loving soul we know. We love you so much. 🌸', event); pop(event)">
+      <div class="mem-emoji">🌸</div>
+      <div>
+        <div class="mem-text">Mama's gentle love — always soft, always present, always enough</div>
+        <div class="mem-tag">Your love is the quietest and the loudest thing 🤍</div>
+      </div>
+    </div>
+
+    <div class="memory-item" onclick="showPopup('Baba and adik goofing around — those rare smiles are so precious to us 😄', event); pop(event)">
+      <div class="mem-emoji">😄</div>
+      <div>
+        <div class="mem-text">Baba & adik being total goofballs together</div>
+        <div class="mem-tag">Baba's laugh is rare — and that makes it priceless 💙</div>
+      </div>
+    </div>
+
+    <div class="memory-item" onclick="showPopup('Mama, thank you for taking care of Baba with so much love and patience. 🤲', event); pop(event)">
+      <div class="mem-emoji">🤲</div>
+      <div>
+        <div class="mem-text">Mama caring for Baba through every hard day — never wavering</div>
+        <div class="mem-tag">Your devotion is the most beautiful thing we've ever seen 💕</div>
+      </div>
+    </div>
+
+    <div class="memory-item" onclick="showPopup('Baba, we see how hard you try for us. Please rest, we are so proud of you. 🌙', event); pop(event)">
+      <div class="mem-emoji">🌙</div>
+      <div>
+        <div class="mem-text">Baba trying his best, even on the hardest days</div>
+        <div class="mem-tag">Your effort speaks louder than any words ever could 🌿</div>
+      </div>
+    </div>
+
+  </div>
+  <button class="btn btn-peach" onclick="goTo(4); launchConfetti(); showPopup('We love you so much! 🎉', event)">
+    A Final Message 💌
+  </button>
+</div>
+
+<!-- ===== PAGE 5 — FINAL ===== -->
+<div class="page" id="page5">
+  <div class="final-frame">
+    <p style="font-size:2.6rem; margin-bottom:12px;">💍</p>
+    <div class="final-msg">
+      Happy Anniversary,<br>Mama & Baba 💕
+    </div>
+    <p class="final-sub">
+      Mama — you are the gentlest soul, always giving, always loving,<br>
+      even when your own heart is heavy. We see you. We love you.<br><br>
+      Baba — every ounce of strength you give, we carry with us.<br>
+      Your sacrifice is never unseen. We are so proud to be yours.<br><br>
+      <strong>May Allah grant Baba good health and ease his pain.<br>
+      May Allah reward Mama for every act of love and care.<br>
+      May Allah bless your marriage and keep your family close. 🤲</strong>
+    </p>
+    <div class="hearts-row">
+      <span class="heart-chip" style="background:#FFE4EC;color:#E04A6A" onclick="showPopup('I love you, Mama! 🌹', event); pop(event)">🌷 Love, Kakak</span>
+      <span class="heart-chip" style="background:#E4F0FF;color:#3A80C0" onclick="showPopup('I love you, Baba! 💙', event); pop(event)">🌊 Love, Adik</span>
+      <span class="heart-chip" style="background:#E8FFE8;color:#3A9060" onclick="showPopup('May Allah bless you always! 🤲', event); pop(event)">🌿 Blessed</span>
+      <span class="heart-chip" style="background:#FFF8E0;color:#A07000" onclick="showPopup('Forever & always! ✨', event); pop(event)">⭐ Always</span>
+    </div>
+    <button class="btn btn-rose" onclick="launchConfetti(); showPopup('🎊 Happy Anniversary!! 🎊', event)" style="width:100%;justify-content:center;">
+      🎉 Celebrate!! 🎉
+    </button>
+  </div>
+</div>
+
+<script>
+  let currentPage = 0;
+  const totalPages = 5;
+
+  const pageColors = [
+    ['#FF6B8A','#FFB4A2'],
+    ['#FF9A6B','#FFCC99'],
+    ['#B89AE8','#DDD0FF'],
+    ['#6BC8E8','#A8E0F0'],
+    ['#FF8AAA','#FFB4CC'],
+  ];
+
+  const popupColors = [
+    { bg: '#FF6B8A', text: 'white' },
+    { bg: '#FFB4A2', text: '#5A1020' },
+    { bg: '#C9B8E8', text: '#2A1060' },
+    { bg: '#A8E6CF', text: '#0A4020' },
+    { bg: '#FFD966', text: '#5A3000' },
+    { bg: '#A8D8EA', text: '#0A2050' },
+    { bg: '#FF8AAA', text: 'white' },
+  ];
+
+  const sparkleEmojis = ['✨','🌸','💖','⭐','🌟','💫','🎀','🌺','💝','🦋'];
+
+  function goTo(index) {
+    document.querySelectorAll('.page').forEach((p, i) => {
+      p.classList.toggle('active', i === index);
+    });
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === index);
+    });
+    currentPage = index;
+    document.getElementById('backBtn').classList.toggle('visible', index > 0);
+  }
+
+  function goBack() {
+    if (currentPage > 0) goTo(currentPage - 1);
+  }
+
+  function showPopup(msg, event) {
+    const container = document.getElementById('popupContainer');
+    const color = popupColors[Math.floor(Math.random() * popupColors.length)];
+    
+    const x = event ? Math.min(Math.max(event.clientX - 80, 10), window.innerWidth - 220) : Math.random() * (window.innerWidth - 200);
+    const y = event ? event.clientY - 10 : Math.random() * (window.innerHeight - 100);
+
+    const el = document.createElement('div');
+    el.className = 'popup-msg';
+    el.textContent = msg;
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.background = color.bg;
+    el.style.color = color.text;
+
+    container.appendChild(el);
+    setTimeout(() => el.remove(), 2500);
+
+    // sparkle burst
+    for (let i = 0; i < 4; i++) {
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      s.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+      s.style.left = (x + Math.random() * 140) + 'px';
+      s.style.top = (y + Math.random() * 40) + 'px';
+      s.style.animationDelay = (Math.random() * 0.3) + 's';
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 1100);
+    }
+  }
+
+  function pop(event) {
+    // extra wiggle on the card
+    const el = event.currentTarget;
+    el.style.transition = 'transform 0.1s';
+    el.style.transform = 'scale(0.95)';
+    setTimeout(() => { el.style.transform = ''; }, 150);
+  }
+
+  function launchConfetti() {
+    const colors = ['#FF6B8A','#FFB4A2','#C9B8E8','#A8E6CF','#FFD966','#A8D8EA','#FF8AAA','#FFE066'];
+    for (let i = 0; i < 60; i++) {
+      setTimeout(() => {
+        const el = document.createElement('div');
+        el.className = 'confetti-piece';
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.top = '-20px';
+        el.style.background = colors[Math.floor(Math.random() * colors.length)];
+        el.style.width = (6 + Math.random() * 10) + 'px';
+        el.style.height = (6 + Math.random() * 10) + 'px';
+        el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        el.style.animationDuration = (1.8 + Math.random() * 1.8) + 's';
+        el.style.opacity = 0.85 + Math.random() * 0.15;
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 4000);
+      }, i * 45);
+    }
+  }
+</script>
+</body>
+</html>
